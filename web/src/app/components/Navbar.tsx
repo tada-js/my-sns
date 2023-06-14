@@ -10,6 +10,7 @@ import {
   SearchIcon,
 } from './ui/icons';
 import { usePathname } from 'next/navigation';
+import ColorButton from './ui/ColorButton';
 
 const menu = [
   {
@@ -33,12 +34,12 @@ const Navbar = () => {
   const pathName = usePathname();
 
   return (
-    <div>
+    <div className="flex items-center justify-between px-6">
       <Link href="/">
-        <h1>My SNS</h1>
+        <h1 className="text-3xl font-bold">Installgram</h1>
       </Link>
       <nav>
-        <ul>
+        <ul className="flex items-center gap-4 p-4">
           {menu.map((item) => (
             <li key={item.href}>
               <Link href={item.href}>
@@ -46,6 +47,7 @@ const Navbar = () => {
               </Link>
             </li>
           ))}
+          <ColorButton text="Sign in" onClick={() => {}} />
         </ul>
       </nav>
     </div>
