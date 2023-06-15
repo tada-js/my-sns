@@ -1,7 +1,7 @@
 interface Props {
   text: string;
   onClick: () => void;
-  size: 'small' | 'big';
+  size?: 'small' | 'big';
 }
 
 const ColorButton = ({ text, onClick, size = 'small' }: Props) => {
