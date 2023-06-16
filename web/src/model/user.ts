@@ -4,3 +4,11 @@ export interface AuthUser {
   email: string;
   image?: string;
 }
+
+export type SimpleUser = Pick<AuthUser, 'username' | 'image'>;
+
+export interface HomeUser extends AuthUser {
+  following: SimpleUser[];
+  followers: SimpleUser[];
+  bookmarks: string[];
+}
