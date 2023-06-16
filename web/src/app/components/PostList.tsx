@@ -4,6 +4,7 @@ import useSWR from 'swr';
 
 const PostList = () => {
   const { data: posts, isLoading } = useSWR<SimplePost[]>('/api/posts');
+  console.log(posts);
   return (
     <ul>{posts && posts.map((post) => <li key={post.id}>{post.text}</li>)}</ul>
   );
