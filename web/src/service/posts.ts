@@ -10,7 +10,7 @@ const simplePostProjection = `
   'text': comments[0].comment,
   'comments': count(comments),
   'id': _id,
-  'createdAt': _createdeAt
+  'createdAt': _createdAt
 `;
 
 export const getFollowingPostsOf = async (username: string) => {
