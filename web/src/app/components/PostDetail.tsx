@@ -5,6 +5,7 @@ import ActionBar from './ActionBar';
 import CommentForm from './CommentForm';
 import Avatar from './Avatar';
 import PostUserAvatar from './PostUserAvatar';
+import { ClipLoader } from 'react-spinners';
 
 interface Props {
   post: SimplePost;
@@ -12,7 +13,7 @@ interface Props {
 
 const PostDetail = ({ post }: Props) => {
   const { id, userImage, username, image, createdAt, likes } = post;
-  const { data } = useSWR<FullPost>(`/api/posts/${id}`);
+  const { data, isLoading } = useSWR<FullPost>(`/api/posts/${id}`);
   const comments = data?.comments;
 
   return (
@@ -30,6 +31,9 @@ const PostDetail = ({ post }: Props) => {
       <div className="flex flex-col w-full basis-2/5">
         <PostUserAvatar image={userImage} username={username} />
         <ul className="h-full p-4 mb-1 overflow-y-auto border-t border-gray-200">
+          <div className="flex justify-center">
+            {isLoading && <ClipLoader color="red" />}
+          </div>
           {comments &&
             comments.map(
               ({ image, username: commentUsername, comment }, index) => (

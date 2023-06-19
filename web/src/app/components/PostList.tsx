@@ -9,7 +9,7 @@ const PostList = () => {
   return (
     <section>
       {isLoading && (
-        <div className="mt-12 text-center">
+        <div className="text-center mt-52">
           <SyncLoaderSpinner size={8} color="red" />
         </div>
       )}
