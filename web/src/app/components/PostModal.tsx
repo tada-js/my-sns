@@ -22,7 +22,7 @@ const PostModal = ({ onClose, children }: Props) => {
       >
         <CloseIcon />
       </button>
-      {children}
+      <div className="w-4/5 bg-white h-3/5 max-w-7xl">{children}</div>
     </section>
   );
 };
