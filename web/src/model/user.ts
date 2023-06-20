@@ -12,3 +12,8 @@ export interface HomeUser extends AuthUser {
   followers: SimpleUser[];
   bookmarks: string[];
 }
+
+export interface SearchUser extends AuthUser {
+  following: number;
+  followers: number;
+}

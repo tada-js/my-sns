@@ -1,3 +1,4 @@
+import { SearchUser } from '@/model/user';
 import { client } from './sanity';
 
 interface OAuthUser {
@@ -36,4 +37,25 @@ export const getUserByUsername = async (username: string) => {
     followers[]->{username, image},
     "bookmarks": bookmarks[]->_id
   }`);
+};
+
+export const searchUsers = async (keyword?: string) => {
+  const query = keyword
+    ? `&& (name match "*${keyword}*") || (username match "*${keyword}*")`
+    : '';
+  return client
+    .fetch(
+      `*[_type == "user" ${query}]{
+    ...,
+    "following": count(following),
+    "followers": count(followers),
+  }`
+    )
+    .then((user) =>
+      user.map((user: SearchUser) => ({
+        ...user,
+        following: user.following ?? 0,
+        followers: user.followers ?? 0,
+      }))
+    );
 };
