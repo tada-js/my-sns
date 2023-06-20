@@ -5,14 +5,17 @@ import useSWR from 'swr';
 import { SearchUser } from '@/model/user';
 import SyncLoaderSpinner from './ui/SyncLoaderSpinner';
 import UserCard from './UserCard';
+import useDebounce from '@/hooks/useDebounce';
 
 const UserSearch = () => {
   const [keyword, setKeyword] = useState('');
+  const debouncedKeyword = useDebounce(keyword);
+
   const {
     data: users,
     isLoading,
     error,
-  } = useSWR<SearchUser[]>(`/api/search/${keyword}`);
+  } = useSWR<SearchUser[]>(`/api/search/${debouncedKeyword}`);
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
