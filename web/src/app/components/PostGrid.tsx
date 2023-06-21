@@ -17,7 +17,9 @@ const PostGrid = ({ username, query }: Props) => {
 
   return (
     <div className="w-full text-center">
-      {isLoading && <SyncLoaderSpinner size={8} color="red" />}
+      {isLoading && (
+        <SyncLoaderSpinner size={8} color="red" className="py-10" />
+      )}
       <ul className="grid grid-cols-3 gap-4 px-8 py-4">
         {posts &&
           posts.map((post, index) => (
