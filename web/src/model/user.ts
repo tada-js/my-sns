@@ -17,3 +17,7 @@ export interface SearchUser extends AuthUser {
   following: number;
   followers: number;
 }
+
+export interface ProfileUser extends SearchUser {
+  posts: number;
+}

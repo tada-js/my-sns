@@ -40,7 +40,7 @@ const Navbar = () => {
   return (
     <div className="flex items-center justify-between px-6">
       <Link href="/">
-        <h1 className="text-3xl font-bold">Installgram</h1>
+        <h1 className="text-3xl font-bold">My SNS</h1>
       </Link>
       <nav>
         <ul className="flex items-center gap-4 p-4">
