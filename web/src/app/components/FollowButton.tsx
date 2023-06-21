@@ -16,8 +16,6 @@ const FollowButton = ({ user }: Props) => {
     loggedInUser &&
     loggedInUser.following.find((item) => item.username === username);
 
-  console.log(following);
-
   const text = following ? 'Unfollow' : 'Follow';
   return (
     <>
