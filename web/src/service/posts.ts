@@ -61,6 +61,7 @@ export const getPostsOf = async (username: string) => {
     )
     .then(mapPosts);
 };
+
 export const getLikedPostsOf = async (username: string) => {
   return client
     .fetch(
@@ -71,6 +72,7 @@ export const getLikedPostsOf = async (username: string) => {
     )
     .then(mapPosts);
 };
+
 export const getSavedPostsOf = async (username: string) => {
   return client
     .fetch(
@@ -80,4 +82,21 @@ export const getSavedPostsOf = async (username: string) => {
       }`
     )
     .then(mapPosts);
+};
+
+export const likePost = async (postId: string, userId: string) => {
+  // https://www.sanity.io/docs/js-client#patch-update-a-document
+  return client
+    .patch(postId)
+    .setIfMissing({ likes: [] })
+    .append('likes', [{ _ref: userId, _type: 'reference' }])
+    .commit({ autoGenerateArrayKeys: true });
+};
+
+export const dislikePost = async (postId: string, userId: string) => {
+  // https://www.sanity.io/docs/js-client#patch-update-a-document
+  return client
+    .patch(postId)
+    .unset([`likes[_ref=="${userId}"]`])
+    .commit();
 };
