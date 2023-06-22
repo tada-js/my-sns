@@ -5,7 +5,7 @@ export interface Comment {
 }
 
 export type SimplePost = Omit<FullPost, 'comments'> & {
-  commnets: number;
+  comments: number;
 };
 
 export interface FullPost {
