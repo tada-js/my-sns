@@ -1,8 +1,8 @@
 'use client';
 
 import { HomeUser, ProfileUser } from '@/model/user';
-import useSWR from 'swr';
 import Button from './ui/Button';
+import useMe from '@/hooks/useMe';
 
 interface Props {
   user: ProfileUser;
@@ -10,7 +10,7 @@ interface Props {
 
 const FollowButton = ({ user }: Props) => {
   const { username } = user;
-  const { data: loggedInUser } = useSWR<HomeUser>('/api/me');
+  const { user: loggedInUser } = useMe();
   const showButton = loggedInUser && loggedInUser.username !== username;
   const following =
     loggedInUser &&
