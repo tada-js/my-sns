@@ -9,13 +9,14 @@ const simplePostProjection = `
   'likes': likes[]->username,
   'text': comments[0].comment,
   'comments': count(comments),
-  'id': _id,
+  'id':_id,
   'createdAt': _createdAt
 `;
 
 const mapPosts = (posts: SimplePost[]) => {
   return posts.map((post: SimplePost) => ({
     ...post,
+    likes: post.likes ?? [],
     image: urlFor(post.image),
   }));
 };
@@ -29,9 +30,7 @@ export const getFollowingPostsOf = async (username: string) => {
     ${simplePostProjection}
   }`
     )
-    .then((posts) =>
-      posts.map((post: SimplePost) => ({ ...post, image: urlFor(post.image) }))
-    );
+    .then(mapPosts);
 };
 
 export const getPost = async (id: string) => {
@@ -89,7 +88,12 @@ export const likePost = async (postId: string, userId: string) => {
   return client
     .patch(postId)
     .setIfMissing({ likes: [] })
-    .append('likes', [{ _ref: userId, _type: 'reference' }])
+    .append('likes', [
+      {
+        _ref: userId,
+        _type: 'reference',
+      },
+    ])
     .commit({ autoGenerateArrayKeys: true });
 };
 

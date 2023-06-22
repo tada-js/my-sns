@@ -1,11 +1,10 @@
 'use client';
-import { SimplePost } from '@/model/post';
-import useSWR from 'swr';
 import PostListCard from './PostListCard';
 import SyncLoaderSpinner from './ui/SyncLoaderSpinner';
+import usePosts from '@/hooks/usePosts';
 
 const PostList = () => {
-  const { data: posts, isLoading } = useSWR<SimplePost[]>('/api/posts');
+  const { posts, isLoading } = usePosts();
   return (
     <section>
       {isLoading && (
