@@ -37,11 +37,13 @@ const PostDetail = ({ post }: Props) => {
             comments.map(
               ({ image, username: commentUsername, comment }, index) => (
                 <li className="flex items-center mb-1" key={index}>
-                  <Avatar
-                    image={image}
-                    size="small"
-                    highlight={commentUsername === username}
-                  />
+                  <div>
+                    <Avatar
+                      image={image}
+                      size="small"
+                      highlight={commentUsername === username}
+                    />
+                  </div>
                   <div className="ml-2">
                     <span className="mr-1 font-semibold">
                       {commentUsername}
