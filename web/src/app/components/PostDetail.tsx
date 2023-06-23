@@ -1,22 +1,19 @@
-import { FullPost, SimplePost } from '@/model/post';
+import { SimplePost } from '@/model/post';
 import Image from 'next/image';
-import useSWR from 'swr';
 import ActionBar from './ActionBar';
-import CommentForm from './CommentForm';
 import Avatar from './Avatar';
 import PostUserAvatar from './PostUserAvatar';
 import { ClipLoader } from 'react-spinners';
+import useFullPost from '@/hooks/useFullPost';
 
 interface Props {
   post: SimplePost;
 }
 
 const PostDetail = ({ post }: Props) => {
-  const { id, userImage, username, image, createdAt, likes } = post;
-  const { data, isLoading } = useSWR<FullPost>(`/api/posts/${id}`);
+  const { id, userImage, username, image } = post;
+  const { post: data, postComment, isLoading } = useFullPost(id);
   const comments = data?.comments;
-
-  const handlePostComment = (comment: string) => {};
 
   return (
     <section className="flex w-full h-full">
@@ -55,8 +52,7 @@ const PostDetail = ({ post }: Props) => {
               )
             )}
         </ul>
-        <ActionBar post={post} />
-        <CommentForm onPostComment={handlePostComment} />
+        <ActionBar post={post} onComment={postComment} />
       </div>
     </section>
   );
