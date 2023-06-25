@@ -3,11 +3,12 @@ interface Props {
   onToggle: (toggled: boolean) => void;
   onIcon: React.ReactNode;
   offIcon: React.ReactNode;
+  title: string;
 }
 
-const ToggleButton = ({ toggled, onToggle, offIcon, onIcon }: Props) => {
+const ToggleButton = ({ toggled, onToggle, offIcon, onIcon, title }: Props) => {
   return (
-    <button onClick={() => onToggle(!toggled)}>
+    <button aria-label={title} onClick={() => onToggle(!toggled)}>
       {toggled ? onIcon : offIcon}
     </button>
   );

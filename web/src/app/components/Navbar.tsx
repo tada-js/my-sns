@@ -19,16 +19,19 @@ const menu = [
     href: '/',
     icon: <HomeIcon />,
     clickedIcon: <HomeFillIcon />,
+    title: 'Home',
   },
   {
     href: '/search',
     icon: <SearchIcon />,
     clickedIcon: <SearchFillIcon />,
+    title: 'Search users',
   },
   {
     href: '/new',
     icon: <NewIcon />,
     clickedIcon: <NewFillIcon />,
+    title: 'New post',
   },
 ];
 
@@ -39,15 +42,15 @@ const Navbar = () => {
 
   return (
     <div className="flex items-center justify-between px-6">
-      <Link href="/">
+      <Link href="/" aria-label="Home">
         <h1 className="text-3xl font-bold">My SNS</h1>
       </Link>
       <nav>
         <ul className="flex items-center gap-4 p-4">
-          {menu.map((item) => (
-            <li key={item.href}>
-              <Link href={item.href}>
-                {pathName === item.href ? item.clickedIcon : item.icon}
+          {menu.map(({ href, icon, clickedIcon, title }) => (
+            <li key={href}>
+              <Link href={href} aria-label={title}>
+                {pathName === href ? clickedIcon : icon}
               </Link>
             </li>
           ))}
