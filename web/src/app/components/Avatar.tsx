@@ -28,7 +28,7 @@ const Avatar = ({ image, size = 'large', highlight = false }: Props) => {
 };
 
 const getContainerStyle = (size: AvatarSize, highlight: boolean): string => {
-  const baseStyle = 'rounded-full flex justify-center items-center';
+  const baseStyle = 'rounded-full flex justify-center items-center shrink-0';
   const highlightStyle = highlight
     ? 'bg-gradient-to-bl from-fuchsia-600 via-rose-500 to-amber-300'
     : '';
